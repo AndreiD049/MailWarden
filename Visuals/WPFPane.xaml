@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MailWarden2.WPFPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MailWarden2"
+             mc:Ignorable="d" Width="340.164" Height="505.328">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Mails to be handled" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" />
+        <TreeView Name="Mails" Grid.Row="1" Margin="5,5,5,5" VirtualizingPanel.VirtualizationMode="Recycling" ItemsSource="{ Binding }" >
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Mails}">
+                    <TextBlock Text="{Binding FolderName}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Timer}" Padding="0 5 0 5" />
+                                <TextBlock Text=" - " Padding="0 5 0 5" />
+                                <TextBlock Text="{Binding Subject}" Padding="0 5 0 5" Width="250" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+            <TreeView.Resources>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True" />
+                    <EventSetter Event="MouseDoubleClick" Handler="MailItem_MouseDoubleClick" />
+                </Style>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
+</UserControl>
