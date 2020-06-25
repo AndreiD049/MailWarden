@@ -1,0 +1,2 @@
+# MailWarden
+Outlook VSTO AddIn
